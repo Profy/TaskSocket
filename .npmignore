@@ -4,3 +4,5 @@ build/**
 .npmignore
 .gitignore
 .editorconfig
+*.sln
+*.csproj
