@@ -19,10 +19,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove=".gitignore" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Documentation\" />
     <Folder Include="Editor\" />
     <Folder Include="Tests\" />
