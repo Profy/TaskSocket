@@ -10,10 +10,6 @@ namespace System.Net.Sockets
     {
         #region Constants
         /// <summary>
-        /// Socket data buffer size.
-        /// </summary>
-        public const int BufferSize = 1024;
-        /// <summary>
         /// Default <see cref="TListenTimeoutAsync(Socket, int)"/> timeout value in miliseconds.
         /// </summary>
         public const int Listen_TimeoutMs = 3000;
@@ -33,14 +29,32 @@ namespace System.Net.Sockets
 
         #region Message
         /// <summary>
+        /// Socket message data buffer size.
+        /// </summary>
+        public static int BufferSize = 1024;
+        /// <summary>
+        /// Set the default message data buffer size.
+        /// </summary>
+        public static void SetBufferSize(int size)
+        {
+            if ((size < 8 || size > ushort.MaxValue))
+            {
+                throw new NotSupportedException("Size of the buffer must be between 8 and 65535");
+            }
+            BufferSize = size;
+        }
+
+        /// <summary>
         /// Default string encoding used to encode/decode messages.
         /// </summary>
         public static Encoding DefaultEncoding { get; private set; } = Encoding.UTF8;
         /// <summary>
         /// Set the default string encoding used to encode/decode messages.
         /// </summary>
-        public static void SetDefaultEncoding(Encoding encoding) => DefaultEncoding = encoding;
-
+        public static void SetDefaultEncoding(Encoding encoding)
+        {
+            DefaultEncoding = encoding;
+        }
         /// <summary>
         /// Encode a string message to byte array.
         /// </summary>
@@ -92,7 +106,7 @@ namespace System.Net.Sockets
         /// <returns>The socket that is used to transmit data to the client.</returns>
         public static async Task<Result<Socket>> TListenAsync(this Socket socket)
         {
-            Socket? transferSocket = null;
+            Socket transferSocket = null;
             try
             {
                 using (Task<Socket> acceptTask = Task<Socket>.Factory.FromAsync(socket.BeginAccept, socket.EndAccept, null))
@@ -119,7 +133,7 @@ namespace System.Net.Sockets
                 return await TListenAsync(socket).ConfigureAwait(false);
             }
 
-            Socket? transferSocket = null;
+            Socket transferSocket = null;
             try
             {
                 Task<Socket> acceptTask = Task<Socket>.Factory.FromAsync(socket.BeginAccept, socket.EndAccept, null);

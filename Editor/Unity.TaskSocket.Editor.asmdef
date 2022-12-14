@@ -1,15 +1,11 @@
 {
-    "name": "Unity.TaskSocket.Runtime",
+    "name": "Unity.TaskSocket.Editor",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:c5bb949088330b9488a6404eff34588a"
+    ],
     "includePlatforms": [
-        "Editor",
-        "EmbeddedLinux",
-        "LinuxStandalone64",
-        "macOSStandalone",
-        "WSA",
-        "WindowsStandalone32",
-        "WindowsStandalone64"
+        "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -18,5 +14,5 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
-    "noEngineReferences": true
+    "noEngineReferences": false
 }

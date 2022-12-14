@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace System.Net.Sockets
 {
-    internal sealed class ClientExample
+    sealed class ClientExample
     {
-        private Socket? _clientSocket = null;
+        private Socket _clientSocket = null;
 
         private readonly int _port = 80;
         private readonly IPHostEntry _host = Dns.GetHostEntry(Dns.GetHostName());
