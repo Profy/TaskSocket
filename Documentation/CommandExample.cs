@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace System.Net.Sockets
 {
-    public sealed class CommandSendExample : ICommandSender
+    sealed class CommandSendExample : ICommandSender
     {
         public string command { get; set; } = "CommandToExecute";
         public Dictionary<string, string> args { get; set; } = new Dictionary<string, string>() { { "a", "value" }, { "b", "value" }, { "c", "value" } };
@@ -14,7 +14,7 @@ namespace System.Net.Sockets
         }
     }
 
-    public sealed class CommandReceiveExample : ICommandReceive
+    sealed class CommandReceiveExample : ICommandReceive
     {
         public string command { get; set; } = "CommandToExecute";
         public Dictionary<string, string> args { get; set; } = new Dictionary<string, string>() { { "a", "value" }, { "b", "value" }, { "c", "value" } };
