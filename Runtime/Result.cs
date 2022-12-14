@@ -60,7 +60,7 @@ namespace System.Net.Sockets
         /// <summary>
         /// Object returned by socket operation.
         /// </summary>
-        public T? Value { get; } = default;
+        public T Value { get; } = default;
         #endregion
 
         #region Constructors
@@ -78,7 +78,7 @@ namespace System.Net.Sockets
         /// Returns a successful socket operation.
         /// </summary>
         /// <param name="value">Object returned by socket operation.</param>
-        public static Result<T> Ok(T? value)
+        public static Result<T> Ok(T value)
         {
             return new Result<T>(value ?? default!, true, string.Empty);
         }
@@ -87,7 +87,7 @@ namespace System.Net.Sockets
         /// </summary>
         /// <param name="value">Object returned by socket operation.</param>
         /// <param name="message">Error message.</param>
-        public static Result<T> Fail(T? value, string message)
+        public static Result<T> Fail(T value, string message)
         {
             return new Result<T>(value ?? default!, false, message);
         }

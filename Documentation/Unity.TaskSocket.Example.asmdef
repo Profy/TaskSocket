@@ -1,0 +1,24 @@
+{
+    "name": "Unity.TaskSocket.Example",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c5bb949088330b9488a6404eff34588a"
+    ],
+    "includePlatforms": [
+        "Editor",
+        "EmbeddedLinux",
+        "LinuxStandalone64",
+        "macOSStandalone",
+        "WSA",
+        "WindowsStandalone32",
+        "WindowsStandalone64"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

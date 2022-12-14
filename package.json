@@ -1,7 +1,11 @@
 {
-	"name": "com.unity.tasksocket",
-	"version": "0.1.0",
-	"displayName": "Task Socket",
-	"unity": "2022.1",
-	"dependencies": {}
+  "name": "com.unity.tasksocket",
+  "displayName": "Task Socket",
+  "version": "1.0.0",
+  "unity": "2021.2",
+  "unityRelease": "0f1",
+  "description": "Task socket is a library for Unity. It's helps setting up TCP sockets (client and server) asynchronously and has their uses on separate threads from the main thread.",
+  "keywords": ["Socket", "Async", "Asynchronous", "Task Parallel Library", "TCP", "Client", "Server"],
+  "category": "Network",
+  "dependencies": {}
 }
