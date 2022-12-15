@@ -135,45 +135,55 @@ namespace System.Net.Sockets
 
     public interface ICommand
     {
-        CommandLine CommandLine => new CommandLine(command, args);
+        CommandLine CommandLine => new CommandLine(Command, Args);
 
-        string command { get; set; }
-        Dictionary<string, string> args { get; set; }
+        string Command { get; set; }
+        Dictionary<string, string> Args { get; set; }
 
         void SetCommandLine(string command, Dictionary<string, string> args = null)
         {
-            this.command = command;
-            this.args = args;
+            this.Command = command;
+            this.Args = args;
         }
         void SetCommand(string command)
         {
             if (string.IsNullOrWhiteSpace(command))
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(command));
             }
 
-            this.command = command;
+            this.Command = command;
         }
 
         bool AddArgs(string key, string value)
         {
-            if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(value))
+            if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(key));
             }
 
-            return args.TryAdd(key, value);
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            return Args.TryAdd(key, value);
         }
         bool UpdateArgs(string key, string value)
         {
-            if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(value))
+            if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(key));
             }
 
-            if (args.ContainsKey(key))
+            if (string.IsNullOrWhiteSpace(value))
             {
-                args[key] = value;
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            if (Args.ContainsKey(key))
+            {
+                Args[key] = value;
                 return true;
             }
             return false;
@@ -182,10 +192,10 @@ namespace System.Net.Sockets
         {
             if (string.IsNullOrEmpty(key))
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(key));
             }
 
-            return args.Remove(key);
+            return Args.Remove(key);
         }
     }
 

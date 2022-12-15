@@ -16,7 +16,7 @@ public class TaskSocketEditor : EditorWindow
     private const int maxSocket = 32;
 
     // Host
-    private IPHostEntry _host = Dns.GetHostEntry(Dns.GetHostName());
+    private readonly IPHostEntry _host = Dns.GetHostEntry(Dns.GetHostName());
     private string hostName = string.Empty;
     private string adress = string.Empty;
     private int port = 0;
@@ -27,7 +27,7 @@ public class TaskSocketEditor : EditorWindow
     private bool _running = false;
 
     // Async com
-    private CancellationTokenSource cts = new CancellationTokenSource();
+    private readonly CancellationTokenSource cts = new CancellationTokenSource();
 
     // Command
     private class CommandGUI
@@ -69,7 +69,7 @@ public class TaskSocketEditor : EditorWindow
     private bool closeRuntime = true;
 
     // GUI
-    private Regex _camelCase = new Regex("(\\B[A-Z])", RegexOptions.Singleline | RegexOptions.CultureInvariant);
+    private readonly Regex _camelCase = new Regex("(\\B[A-Z])", RegexOptions.Singleline | RegexOptions.CultureInvariant);
 
     [MenuItem("Tools/Socket")]
     public static void ShowWindow()
@@ -142,22 +142,22 @@ public class TaskSocketEditor : EditorWindow
     {
         for (int i = 0; i < _commands.Length; i++)
         {
-            _commands[i].foldout = EditorGUILayout.BeginFoldoutHeaderGroup(_commands[i].foldout, _camelCase.Replace(_commands[i].sender.command, " $1"));
+            _commands[i].foldout = EditorGUILayout.BeginFoldoutHeaderGroup(_commands[i].foldout, _camelCase.Replace(_commands[i].sender.Command, " $1"));
             if (_commands[i].foldout)
             {
                 EditorGUILayout.BeginHorizontal();
 
                 EditorGUILayout.BeginVertical();
-                Label("Command"); _commands[i].sender.command = EditorGUILayout.TextField(_commands[i].sender.command);
+                Label("Command"); _commands[i].sender.Command = EditorGUILayout.TextField(_commands[i].sender.Command);
                 EditorGUILayout.EndVertical();
 
                 EditorGUILayout.BeginVertical();
                 Label("Arguments");
-                foreach (string key in _commands[i].sender.args.Keys.ToList())
+                foreach (string key in _commands[i].sender.Args.Keys.ToList())
                 {
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.TextField(key);
-                    _commands[i].sender.args[key] = EditorGUILayout.TextField(_commands[i].sender.args[key]);
+                    _commands[i].sender.Args[key] = EditorGUILayout.TextField(_commands[i].sender.Args[key]);
                     EditorGUILayout.EndHorizontal();
                 }
                 EditorGUILayout.EndVertical();

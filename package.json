@@ -7,5 +7,11 @@
   "description": "Task socket is a library for Unity. It's helps setting up TCP sockets (client and server) asynchronously and their uses from the main thread.",
   "keywords": ["Socket", "Async", "Asynchronous", "Task Parallel Library", "TCP", "Client", "Server"],
   "category": "Network",
+  "samples": [{
+      "displayName": "Task socket examples",
+      "description": "Contains sample scripts showing how to set up sk socket and their uses",
+      "path": "Samples~/Examples"
+    }
+  ],
   "dependencies": {}
 }

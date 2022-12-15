@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Sockets
 {
-    sealed class ClientExample
+    sealed class ClientExample : IDisposable
     {
         private Socket _clientSocket = null;
 
@@ -78,6 +78,11 @@ namespace System.Net.Sockets
                 : receiveResult.Value == 0
                 ? Result<CommandLine>.Fail(default, "Error reading message from client, no data was received")
                 : Result<CommandLine>.Ok(TaskSocket.Decode<CommandLine>(buffer, 0, receiveResult.Value));
+        }
+
+        public void Dispose()
+        {
+            _clientSocket.Dispose();
         }
     }
 }
