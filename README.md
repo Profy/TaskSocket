@@ -1,0 +1,1 @@
+Task socket is a library for Unity. It's helps setting up TCP sockets (client and server) asynchronously and their uses from the main thread.

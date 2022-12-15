@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace System.Net.Sockets
 {
-    sealed class ServerExample
+    sealed class ServerExample : IDisposable
     {
         private const int maxSocket = 32;
 
@@ -96,6 +96,11 @@ namespace System.Net.Sockets
             return receiveResult.Value == 0
                 ? Result<string>.Fail(string.Empty, "Error reading message from client, no data was received")
                 : Result<string>.Ok(TaskSocket.Decode<string>(buffer, 0, receiveResult.Value));
+        }
+
+        public void Dispose()
+        {
+            _listenSocket.Dispose();
         }
     }
 }

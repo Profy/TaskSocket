@@ -12,26 +12,26 @@ namespace System.Net.Sockets
         /// <summary>
         /// Default <see cref="TListenTimeoutAsync(Socket, int)"/> timeout value in miliseconds.
         /// </summary>
-        public const int Listen_TimeoutMs = 3000;
+        public const int ListenTimeoutMs = 3000;
         /// <summary>
         /// Default <see cref="TConnectTimeoutAsync(Socket, EndPoint, int)"/> timeout value in miliseconds.
         /// </summary>
-        public const int Connect_TimeoutMs = 3000;
+        public const int ConnectTimeoutMs = 3000;
         /// <summary>
         /// Default <see cref="TReceiveTimeoutAsync(Socket, byte[], int, int, SocketFlags, int)"/> timeout value in miliseconds.
         /// </summary>
-        public const int Receive_TimeoutMs = 3000;
+        public const int ReceiveTimeoutMs = 3000;
         /// <summary>
         /// Default <see cref="TSendTimeoutAsync(Socket, byte[], int, int, SocketFlags, int)"/> timeout value in miliseconds.
         /// </summary>
-        public const int Send_TimeoutMs = 3000;
+        public const int SendTimeoutMs = 3000;
         #endregion
 
         #region Message
         /// <summary>
         /// Socket message data buffer size.
         /// </summary>
-        public static int BufferSize = 1024;
+        public static int BufferSize { get; private set; } = 1024;
         /// <summary>
         /// Set the default message data buffer size.
         /// </summary>
@@ -67,6 +67,11 @@ namespace System.Net.Sockets
         /// </summary>
         public static byte[] Encode(CommandLine message)
         {
+            if (message is null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
             return message.ToByte();
         }
 
@@ -126,7 +131,7 @@ namespace System.Net.Sockets
         /// </summary>
         /// <param name="socket">Server socket.</param>
         /// <returns>The socket that is used to transmit data to the client.</returns>
-        public static async Task<Result<Socket>> TListenTimeoutAsync(this Socket socket, int timeoutMs = Listen_TimeoutMs)
+        public static async Task<Result<Socket>> TListenTimeoutAsync(this Socket socket, int timeoutMs = ListenTimeoutMs)
         {
             if (timeoutMs < 1)
             {
@@ -179,7 +184,7 @@ namespace System.Net.Sockets
         /// </summary>
         /// <param name="socket">Client socket.</param>
         /// <param name="endpoint">Server network adress.</param>
-        public static async Task<Result> TConnectTimeoutAsync(this Socket socket, EndPoint endpoint, int timeoutMs = Connect_TimeoutMs)
+        public static async Task<Result> TConnectTimeoutAsync(this Socket socket, EndPoint endpoint, int timeoutMs = ConnectTimeoutMs)
         {
             if (timeoutMs < 1)
             {
@@ -240,7 +245,7 @@ namespace System.Net.Sockets
         /// <param name="size">The number of bytes to receive.</param>
         /// <param name="socketFlags">A bitwise combination of the SocketFlags values.</param>
         /// <returns>The result of the communication. If the communication was successful, the result contains the number of bytes received.</returns>
-        public static async Task<Result<int>> TReceiveTimeoutAsync(this Socket socket, byte[] buffer, int offset, int size, SocketFlags socketFlags, int timeoutMs = Receive_TimeoutMs)
+        public static async Task<Result<int>> TReceiveTimeoutAsync(this Socket socket, byte[] buffer, int offset, int size, SocketFlags socketFlags, int timeoutMs = ReceiveTimeoutMs)
         {
             if (timeoutMs < 1)
             {
@@ -303,7 +308,7 @@ namespace System.Net.Sockets
         /// <param name="size">The number of bytes to send.</param>
         /// <param name="socketFlags">A bitwise combination of the SocketFlags values.</param>
         /// <returns>The result of the communication. If the communication was successful, the result contains the number of bytes sended.</returns>
-        public static async Task<Result<int>> TSendTimeoutAsync(this Socket socket, byte[] buffer, int offset, int size, SocketFlags socketFlags, int timeoutMs = Send_TimeoutMs)
+        public static async Task<Result<int>> TSendTimeoutAsync(this Socket socket, byte[] buffer, int offset, int size, SocketFlags socketFlags, int timeoutMs = SendTimeoutMs)
         {
             if (timeoutMs < 1)
             {
@@ -360,7 +365,7 @@ namespace System.Net.Sockets
         /// <param name="socket">Server or Client socket.</param>
         /// <param name="filePath">A string that contains the path and name of the file to send. This parameter can be null.</param>
         /// <returns>The result of the communication. If the communication was successful, the result contains the number of bytes sended.</returns>
-        public static async Task<Result<int>> TSendFileTimeoutAsync(this Socket socket, string filePath, int timeoutMs = Send_TimeoutMs)
+        public static async Task<Result<int>> TSendFileTimeoutAsync(this Socket socket, string filePath, int timeoutMs = SendTimeoutMs)
         {
             if (timeoutMs < 1)
             {
